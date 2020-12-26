@@ -13,7 +13,7 @@
      <b-container>
       <div id="global-head" class="mb-4">
        <h2>Global</h2>
-       <h4>last update: <span>{{globalLastUpdate}}</span></h4>
+       <h4>Update Terakhir: <span>{{globalLastUpdate}}</span></h4>
       </div>
       <b-row v-for="(data, idx) in apiDataGlobal" :key="idx">
         <b-col >
@@ -43,7 +43,7 @@
       </b-row>
       <div id="countries-head" class="mb-4">
        <h2>Indonesia</h2>
-       <h4>last update: <span>25 Desember 2020</span></h4>
+       <h4>Update Terakhir: <span>{{IDNLastUpdate}}</span></h4>
       </div>
       <b-row v-for="(data, idx) in apiDataIDN" :key="idx+1">
         <b-col>
@@ -62,7 +62,8 @@
             </div>
           </b-card>
         </b-col>
-        <b-col><b-card  class="text-center">
+        <b-col>
+          <b-card  class="text-center">
             <div id="card-positif">
               <h5 class="mb-3">Meninggal</h5>
               <h3 id="nilai-meninggal">{{data.meninggal}}</h3>
@@ -73,7 +74,9 @@
      </b-container>
      <b-container>
        <div id="test">
-         <p>copyright by Farhan Rabbaanii | api using Mathdroid repository</p>
+        <h4>Stay at Home !</h4>
+        <h4>Stay Safe !</h4>
+        <p></> by <a href="https://github.com/farhanrbnn">farhanrbnn</a> | API by <a href="https://github.com/mathdroid/covid-19-api">mathdroid</a> and <a href="https://github.com/Reynadi531/api-covid19-indonesia-v2">Reynadi531</a></p>
        </div>
      </b-container>
   </div>
@@ -118,6 +121,7 @@ export default {
       }
 
       this.apiDataIDN.push(object)
+      this.IDNLastUpdate = res.data.lastUpdate
       console.log(this.apiDataIDN)
     })
     .catch((err) => {
@@ -154,11 +158,15 @@ export default {
 }
 
 #countries-head {
-  margin-top: 150px;
+  margin-top: 100px;
 }
 
 #test {
-  height: 50px;
+  height: 100px;
   background-color: #F3F4F8;
+}
+
+.text-center {
+   box-shadow: 5px 10px #DADADA;
 }
 </style>
