@@ -70,7 +70,7 @@
             </div>
           </b-card></b-col>
       </b-row>
-      <b-button class="my-5" variant="info">More Details</b-button>
+      <b-button class="my-5" variant="info"><router-link to="/details"><p id="router-details">More Details</p></router-link></b-button>
      </b-container>
      <b-container>
        <div id="test">
@@ -167,5 +167,10 @@ export default {
 
 .text-center {
    box-shadow: 5px 10px #DADADA;
+}
+
+#router-details {
+  margin-bottom: 0;
+  color: white;
 }
 </style>

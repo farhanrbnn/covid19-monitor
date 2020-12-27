@@ -13,13 +13,13 @@
      <b-container id="details-head">
       <b-row>
         <b-col cols="4">
+          <h5>Pilih Provinsi</h5>
           <b-form-select v-model="selected">
             <b-form-select-option :value="prov" v-for="(prov, idx) in provinsi" :key="idx">{{ prov }}</b-form-select-option>
         </b-form-select> 
         </b-col>
         <b-col cols="8">
           <h2 v-model="selected">{{selected}}</h2>
-          <h4>Update Terakhir: 25 Desember 2020</h4>
           <b-row v-for="(data, index) in apiData" :key="index">
             <b-col>
               <b-card  class="text-center">
@@ -69,7 +69,6 @@ export default {
       .then((res) => {
         let data = res.data
         let arr = []
-        console.log(res.data)
 
         for(let i = 0; i < data.length; i++) {
           if(data) {
@@ -88,8 +87,8 @@ export default {
       let data = this.data
       let arr = []
 
-      if(this.selected) {
-        for(let i = 0.; i < data.length; i++) {
+      if(data) {
+        for(let i = 0; i < data.length; i++) {
           if(this.selected === data[i].provinsi) {
             let object = {
               positif: data[i].kasus,
@@ -117,6 +116,7 @@ export default {
 #details {
   font-family: 'Roboto', sans-serif;
   background-color: #F3F4F8;
+  height: 930px;
   color: #595E6B;
 }
 #details-head {
@@ -142,4 +142,6 @@ export default {
 #countries-head {
   margin-top: 100px;
 }
+
+
 </style>
