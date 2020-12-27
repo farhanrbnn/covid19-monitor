@@ -51,6 +51,7 @@
       <b-row id="data-akumulasi">
         <b-col>
           <h4>Data Akumulasi Kasus COVID-19 di Indonesia</h4>
+          <line-chart></line-chart>
         </b-col>
       </b-row>
      </b-container>
@@ -59,9 +60,13 @@
 
 <script>
 import axios from 'axios'
+import LineChart from '@/components/LineChart'
 
 export default {
   name: 'details',
+  components: {
+    LineChart
+  },
   data () {
     return {
       selected: null,
