@@ -9,7 +9,7 @@
         <b-nav-item>Tentang</b-nav-item>
       </b-navbar-nav>
       </b-collapse>
-     </b-navbar>   
+     </b-navbar>
      <b-container>
       <div id="global-head" class="mb-4">
        <h2>Global</h2>
@@ -89,44 +89,43 @@ export default {
   name: 'dashboard',
   data () {
     return {
-     apiDataGlobal: [],
-     apiDataIDN: [],
-     globalLastUpdate: null,
-     IDNLastUpdate: null
+      apiDataGlobal: [],
+      apiDataIDN: [],
+      globalLastUpdate: null,
+      IDNLastUpdate: null
     }
   },
- async created () {
+  async created () {
     await axios.get('https://covid19.mathdro.id/api')
-    .then((res) => {
-
-      let object = {
-        positif: res.data.confirmed.value,
-        sembuh: res.data.recovered.value,
-        meninggal: res.data.deaths.value
-      }
-      console.log(this.apiDataGlobal)
-      this.apiDataGlobal.push(object)
-      this.globalLastUpdate = res.data.lastUpdate
-    })
-    .catch((err) => {
-      alert('error when fetching API' + err)
-    })
+      .then((res) => {
+        let object = {
+          positif: res.data.confirmed.value,
+          sembuh: res.data.recovered.value,
+          meninggal: res.data.deaths.value
+        }
+        console.log(this.apiDataGlobal)
+        this.apiDataGlobal.push(object)
+        this.globalLastUpdate = res.data.lastUpdate
+      })
+      .catch((err) => {
+        alert('error when fetching API' + err)
+      })
 
     await axios.get('https://covid19.mathdro.id/api/countries/indonesia')
-    .then((res) => {
-      let object = {
-        positif:res.data.confirmed.value,
-        sembuh: res.data.recovered.value,
-        meninggal: res.data.deaths.value
-      }
+      .then((res) => {
+        let object = {
+          positif: res.data.confirmed.value,
+          sembuh: res.data.recovered.value,
+          meninggal: res.data.deaths.value
+        }
 
-      this.apiDataIDN.push(object)
-      this.IDNLastUpdate = res.data.lastUpdate
-      console.log(this.apiDataIDN)
-    })
-    .catch((err) => {
-      alert('error when fetching API' + err)
-    })
+        this.apiDataIDN.push(object)
+        this.IDNLastUpdate = res.data.lastUpdate
+        console.log(this.apiDataIDN)
+      })
+      .catch((err) => {
+        alert('error when fetching API' + err)
+      })
   }
 }
 </script>
