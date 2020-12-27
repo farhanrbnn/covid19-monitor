@@ -70,7 +70,7 @@
             </div>
           </b-card></b-col>
       </b-row>
-      <b-button class="my-5" variant="info"><router-link to="/details"><p id="router-details">More Details</p></router-link></b-button>
+      <b-button class="my-5" variant="info"><router-link to="/details"><p id="router-details">Detail</p></router-link></b-button>
      </b-container>
      <b-container>
        <div id="test">

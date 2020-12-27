@@ -1,7 +1,7 @@
 <template>
   <div id="details">
     <b-navbar toggleable="lg" type="dark" variant="dark">
-      <b-navbar-brand href="#" id="brand">Covid 19 Monitor</b-navbar-brand>
+      <b-navbar-brand href="/" id="brand">Covid 19 Monitor</b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav class="ml-auto">
@@ -48,6 +48,11 @@
           </b-row>
         </b-col>
       </b-row>
+      <b-row id="data-akumulasi">
+        <b-col>
+          <h4>Data Akumulasi Kasus COVID-19 di Indonesia</h4>
+        </b-col>
+      </b-row>
      </b-container>
   </div>
 </template>
@@ -61,7 +66,9 @@ export default {
     return {
       selected: null,
       provinsi: null,
-      data: null
+      data: null,
+      positiveDaily: null,
+      dailyDate: null
     }
   },
   async created () {
@@ -77,6 +84,25 @@ export default {
         }
         this.provinsi = arr
         this.data = res.data
+      })
+      .catch((err) => {
+        alert('error when fetching API' + err)
+      })
+
+    await axios.get('https://apicovid19indonesia-v2.vercel.app/api/indonesia/harian')
+      .then((res) => {
+        let data = res.data
+        let arrPositive = []
+        let arrDate = []
+      
+        for(let i = 0; i < data.length; i++) {
+          if (data) {
+            arrPositive.push(data[i].positif_kumulatif)
+            arrDate.push(data[i].tanggal)
+          }
+        }
+        this.dailyDate = arrDate
+        this.positiveDaily = arrPositive
       })
       .catch((err) => {
         alert('error when fetching API' + err)
@@ -142,6 +168,7 @@ export default {
 #countries-head {
   margin-top: 100px;
 }
-
-
+#data-akumulasi {
+  margin-top: 150px;
+}
 </style>
