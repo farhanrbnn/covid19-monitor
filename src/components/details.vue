@@ -16,7 +16,7 @@
           <h5>Pilih Provinsi</h5>
           <b-form-select v-model="selected">
             <b-form-select-option :value="prov" v-for="(prov, idx) in provinsi" :key="idx">{{ prov }}</b-form-select-option>
-        </b-form-select> 
+        </b-form-select>
         </b-col>
         <b-col cols="8">
           <h2 v-model="selected">{{selected}}</h2>
@@ -51,7 +51,7 @@
       <b-row id="data-akumulasi">
         <b-col>
           <h4>Data Akumulasi Kasus COVID-19 di Indonesia</h4>
-          <line-chart></line-chart>
+          <line-chart v-if="loaded":chart-data="chartData" ></line-chart>
         </b-col>
       </b-row>
      </b-container>
@@ -73,17 +73,20 @@ export default {
       provinsi: null,
       data: null,
       positiveDaily: null,
-      dailyDate: null
+      dailyDate: null,
+      loaded: false,
+      chartData: null
     }
   },
   async created () {
     await axios.get('https://apicovid19indonesia-v2.vercel.app/api/indonesia/provinsi')
       .then((res) => {
+        this.loaded = true
         let data = res.data
         let arr = []
 
-        for(let i = 0; i < data.length; i++) {
-          if(data) {
+        for (let i = 0; i < data.length; i++) {
+          if (data) {
             arr.push(data[i].provinsi)
           }
         }
@@ -96,18 +99,30 @@ export default {
 
     await axios.get('https://apicovid19indonesia-v2.vercel.app/api/indonesia/harian')
       .then((res) => {
+        this.loaded = true
         let data = res.data
         let arrPositive = []
         let arrDate = []
-      
-        for(let i = 0; i < data.length; i++) {
+
+        for (let i = 0; i < data.length; i++) {
           if (data) {
             arrPositive.push(data[i].positif_kumulatif)
-            arrDate.push(data[i].tanggal)
+            arrDate.push(data[i].tanggal)   
           }
         }
         this.dailyDate = arrDate
         this.positiveDaily = arrPositive
+        
+        this.chartData = {
+          labels: this.dailyDate,
+          datasets: [{
+            label: 'Akumulasi Jumlah Kasus',
+            backgroundColor: '#DCB93D',
+            data: this.positiveDaily
+          }]
+        }
+
+        console.log(this.chartData)
       })
       .catch((err) => {
         alert('error when fetching API' + err)
@@ -118,9 +133,9 @@ export default {
       let data = this.data
       let arr = []
 
-      if(data) {
-        for(let i = 0; i < data.length; i++) {
-          if(this.selected === data[i].provinsi) {
+      if (data) {
+        for (let i = 0; i < data.length; i++) {
+          if (this.selected === data[i].provinsi) {
             let object = {
               positif: data[i].kasus,
               sembuh: data[i].sembuh,
