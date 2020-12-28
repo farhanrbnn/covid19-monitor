@@ -51,7 +51,7 @@
       <b-row id="data-akumulasi">
         <b-col>
           <h4>Data Akumulasi Kasus COVID-19 di Indonesia</h4>
-          <line-chart v-if="loaded":chart-data="chartData" ></line-chart>
+          <line-chart v-if="loaded" :chart-data="chartData" ></line-chart>
         </b-col>
       </b-row>
      </b-container>
@@ -107,12 +107,12 @@ export default {
         for (let i = 0; i < data.length; i++) {
           if (data) {
             arrPositive.push(data[i].positif_kumulatif)
-            arrDate.push(data[i].tanggal)   
+            arrDate.push(data[i].tanggal)
           }
         }
         this.dailyDate = arrDate
         this.positiveDaily = arrPositive
-        
+
         this.chartData = {
           labels: this.dailyDate,
           datasets: [{
@@ -189,6 +189,10 @@ export default {
   margin-top: 100px;
 }
 #data-akumulasi {
-  margin-top: 150px;
+  margin-top: 100px;
+}
+#test {
+  height: 100px;
+  background-color: #F3F4F8;
 }
 </style>
