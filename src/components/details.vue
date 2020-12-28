@@ -12,16 +12,16 @@
      </b-navbar>
      <b-container id="details-head">
       <b-row>
-        <b-col cols="4">
+        <b-col cols="4" >
           <h5>Pilih Provinsi</h5>
           <b-form-select v-model="selected">
             <b-form-select-option :value="prov" v-for="(prov, idx) in provinsi" :key="idx">{{ prov }}</b-form-select-option>
         </b-form-select>
         </b-col>
-        <b-col cols="8">
+        <b-col cols="8" >
           <h2 v-model="selected">{{selected}}</h2>
           <b-row v-for="(data, index) in apiData" :key="index">
-            <b-col>
+            <b-col lg>
               <b-card  class="text-center">
                 <div id="card-positif">
                   <h5 class="mb-3">Positif</h5>
@@ -29,7 +29,7 @@
                </div>
              </b-card>
             </b-col>
-            <b-col>
+            <b-col lg>
               <b-card  class="text-center">
                 <div id="card-sembuh">
                   <h5 class="mb-3">Sembuh</h5>
@@ -37,7 +37,7 @@
                </div>
              </b-card>
             </b-col>
-            <b-col>
+            <b-col lg>
               <b-card  class="text-center">
                 <div id="card-meninggal">
                   <h5 class="mb-3">Meninggal</h5>
@@ -106,10 +106,14 @@ export default {
 
         for (let i = 0; i < data.length; i++) {
           if (data) {
+            let APIDate = new Date(data[i].tanggal)
+
             arrPositive.push(data[i].positif_kumulatif)
-            arrDate.push(data[i].tanggal)
+            arrDate.push(APIDate.toLocaleDateString())
+
           }
         }
+
         this.dailyDate = arrDate
         this.positiveDaily = arrPositive
 

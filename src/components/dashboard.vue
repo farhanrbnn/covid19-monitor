@@ -104,10 +104,10 @@ export default {
           meninggal: res.data.deaths.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         }
 
-        console.log(res.data.confirmed.value)
-        console.log(this.apiDataGlobal)
+        let date = new Date(res.data.lastUpdate)
+
         this.apiDataGlobal.push(object)
-        this.globalLastUpdate = res.data.lastUpdate
+        this.globalLastUpdate = date.toLocaleDateString()
       })
       .catch((err) => {
         alert('error when fetching API' + err)
@@ -121,9 +121,11 @@ export default {
           meninggal: res.data.deaths.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         }
 
+        let date = new Date(res.data.lastUpdate)
+
         this.apiDataIDN.push(object)
-        this.IDNLastUpdate = res.data.lastUpdate
-        console.log(this.apiDataIDN)
+        this.IDNLastUpdate = date.toLocaleDateString()
+      
       })
       .catch((err) => {
         alert('error when fetching API' + err)
