@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import dashboard from '@/components/dashboard'
 import details from '@/components/details'
 
-
 Vue.use(Router)
 
 export default new Router({

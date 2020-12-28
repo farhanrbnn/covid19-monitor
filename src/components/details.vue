@@ -19,7 +19,7 @@
         </b-form-select>
         </b-col>
         <b-col cols="8" >
-          <h2 v-model="selected">{{selected}}</h2>
+          <h2>{{selected}}</h2>
           <b-row v-for="(data, index) in apiData" :key="index">
             <b-col lg>
               <b-card  class="text-center">
@@ -110,7 +110,6 @@ export default {
 
             arrPositive.push(data[i].positif_kumulatif)
             arrDate.push(APIDate.toLocaleDateString())
-
           }
         }
 
@@ -141,16 +140,16 @@ export default {
         for (let i = 0; i < data.length; i++) {
           if (this.selected === data[i].provinsi) {
             let object = {
-              positif: data[i].kasus.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-              sembuh: data[i].sembuh.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-              meninggal: data[i].meninggal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+              positif: data[i].kasus.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+              sembuh: data[i].sembuh.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+              meninggal: data[i].meninggal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             }
             arr.push(object)
           }
         }
       }
       return arr
-    }  
+    }
   }
 }
 

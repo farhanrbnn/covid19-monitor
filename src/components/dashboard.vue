@@ -4,10 +4,6 @@
       <b-navbar-brand href="#" id="brand">Covid 19 Monitor</b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
-      <b-navbar-nav class="ml-auto">
-        <b-nav-item>Info</b-nav-item>
-        <b-nav-item>Tentang</b-nav-item>
-      </b-navbar-nav>
       </b-collapse>
      </b-navbar>
      <b-container>
@@ -16,7 +12,7 @@
        <h4>Update Terakhir: <span>{{globalLastUpdate}}</span></h4>
       </div>
       <b-row v-for="(data, idx) in apiDataGlobal" :key="idx">
-        <b-col >
+        <b-col  lg>
           <b-card  class="text-center">
             <div id="card-positif">
               <h5 class="mb-3">Positif</h5>
@@ -24,7 +20,7 @@
             </div>
           </b-card>
         </b-col>
-        <b-col>
+        <b-col lg>
           <b-card class="text-center">
             <div id="card-sembuh">
               <h5 class="mb-3">Sembuh</h5>
@@ -32,7 +28,7 @@
             </div>
           </b-card>
         </b-col>
-        <b-col>
+        <b-col lg>
           <b-card class="text-center">
             <div id="card-meninggal">
              <h5 class="mb-3">Meninggal</h5>
@@ -46,7 +42,7 @@
        <h4>Update Terakhir: <span>{{IDNLastUpdate}}</span></h4>
       </div>
       <b-row v-for="(data, idx) in apiDataIDN" :key="idx+1">
-        <b-col>
+        <b-col lg>
           <b-card  class="text-center">
             <div id="card-positif">
               <h5 class="mb-3">Positif</h5>
@@ -54,7 +50,7 @@
             </div>
           </b-card>
         </b-col>
-        <b-col>
+        <b-col lg>
           <b-card  class="text-center">
             <div id="card-positif">
               <h5 class="mb-3">Sembuh</h5>
@@ -62,7 +58,7 @@
             </div>
           </b-card>
         </b-col>
-        <b-col>
+        <b-col lg>
           <b-card  class="text-center">
             <div id="card-positif">
               <h5 class="mb-3">Meninggal</h5>
@@ -76,7 +72,7 @@
        <div id="test">
         <h4>Stay at Home !</h4>
         <h4>Stay Safe !</h4>
-        <p></> by <a href="https://github.com/farhanrbnn">farhanrbnn</a> | API by <a href="https://github.com/mathdroid/covid-19-api">mathdroid</a> and <a href="https://github.com/Reynadi531/api-covid19-indonesia-v2">Reynadi531</a></p>
+        <p>{{footer}} by <a href="https://github.com/farhanrbnn">farhanrbnn</a> | API by <a href="https://github.com/mathdroid/covid-19-api">mathdroid</a> and <a href="https://github.com/Reynadi531/api-covid19-indonesia-v2">Reynadi531</a></p>
        </div>
      </b-container>
   </div>
@@ -92,16 +88,17 @@ export default {
       apiDataGlobal: [],
       apiDataIDN: [],
       globalLastUpdate: null,
-      IDNLastUpdate: null
+      IDNLastUpdate: null,
+      footer: '</>'
     }
   },
   async created () {
     await axios.get('https://covid19.mathdro.id/api')
       .then((res) => {
         let object = {
-          positif: res.data.confirmed.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-          sembuh: res.data.recovered.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-          meninggal: res.data.deaths.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+          positif: res.data.confirmed.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+          sembuh: res.data.recovered.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+          meninggal: res.data.deaths.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
         }
 
         let date = new Date(res.data.lastUpdate)
@@ -116,16 +113,15 @@ export default {
     await axios.get('https://covid19.mathdro.id/api/countries/indonesia')
       .then((res) => {
         let object = {
-          positif: res.data.confirmed.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-          sembuh: res.data.recovered.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-          meninggal: res.data.deaths.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+          positif: res.data.confirmed.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+          sembuh: res.data.recovered.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+          meninggal: res.data.deaths.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
         }
 
         let date = new Date(res.data.lastUpdate)
 
         this.apiDataIDN.push(object)
         this.IDNLastUpdate = date.toLocaleDateString()
-      
       })
       .catch((err) => {
         alert('error when fetching API' + err)
