@@ -99,10 +99,12 @@ export default {
     await axios.get('https://covid19.mathdro.id/api')
       .then((res) => {
         let object = {
-          positif: res.data.confirmed.value,
-          sembuh: res.data.recovered.value,
-          meninggal: res.data.deaths.value
+          positif: res.data.confirmed.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+          sembuh: res.data.recovered.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+          meninggal: res.data.deaths.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         }
+
+        console.log(res.data.confirmed.value)
         console.log(this.apiDataGlobal)
         this.apiDataGlobal.push(object)
         this.globalLastUpdate = res.data.lastUpdate
@@ -114,9 +116,9 @@ export default {
     await axios.get('https://covid19.mathdro.id/api/countries/indonesia')
       .then((res) => {
         let object = {
-          positif: res.data.confirmed.value,
-          sembuh: res.data.recovered.value,
-          meninggal: res.data.deaths.value
+          positif: res.data.confirmed.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+          sembuh: res.data.recovered.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+          meninggal: res.data.deaths.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         }
 
         this.apiDataIDN.push(object)

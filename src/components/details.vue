@@ -137,16 +137,16 @@ export default {
         for (let i = 0; i < data.length; i++) {
           if (this.selected === data[i].provinsi) {
             let object = {
-              positif: data[i].kasus,
-              sembuh: data[i].sembuh,
-              meninggal: data[i].meninggal
+              positif: data[i].kasus.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+              sembuh: data[i].sembuh.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+              meninggal: data[i].meninggal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
             }
             arr.push(object)
           }
         }
       }
       return arr
-    }
+    }  
   }
 }
 
