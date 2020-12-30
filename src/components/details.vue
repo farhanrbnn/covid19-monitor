@@ -5,8 +5,7 @@
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav class="ml-auto">
-        <b-nav-item>Info</b-nav-item>
-        <b-nav-item>Tentang</b-nav-item>
+        <b-nav-item @click="bacot">Tentang</b-nav-item>
       </b-navbar-nav>
       </b-collapse>
      </b-navbar>
@@ -130,6 +129,11 @@ export default {
       .catch((err) => {
         alert('error when fetching API' + err)
       })
+  },
+  methods: {
+    bacot () {
+      this.$alert('Website ini digunakan untuk mempermudah pengaksesan data. Data yang tertera pada website ini berasal dari The Center for Systems Science and Engineering John Hopkins University dan data.covid.go.id')
+    }
   },
   computed: {
     apiData () {

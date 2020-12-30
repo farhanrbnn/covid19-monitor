@@ -4,6 +4,9 @@
       <b-navbar-brand href="#" id="brand">Covid 19 Monitor</b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav class="ml-auto">
+        <b-nav-item @click="alertClick">Tentang</b-nav-item>
+      </b-navbar-nav>
       </b-collapse>
      </b-navbar>
      <b-container>
@@ -90,6 +93,11 @@ export default {
       globalLastUpdate: null,
       IDNLastUpdate: null,
       footer: '</>'
+    }
+  },
+  methods: {
+    alertClick () {
+      this.$alert('Website ini digunakan untuk mempermudah pengaksesan data. Data yang tertera pada website ini berasal dari The Center for Systems Science and Engineering John Hopkins University dan data.covid19.go.id')
     }
   },
   async created () {
