@@ -131,7 +131,7 @@ export default {
       })
   },
   methods: {
-    bacot () {
+    alertClick () {
       this.$alert('Website ini digunakan untuk mempermudah pengaksesan data. Data yang tertera pada website ini berasal dari The Center for Systems Science and Engineering John Hopkins University dan data.covid.go.id')
     }
   },
