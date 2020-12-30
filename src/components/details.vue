@@ -5,7 +5,7 @@
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav class="ml-auto">
-        <b-nav-item @click="bacot">Tentang</b-nav-item>
+        <b-nav-item @click="alertClick">Tentang</b-nav-item>
       </b-navbar-nav>
       </b-collapse>
      </b-navbar>
@@ -131,8 +131,8 @@ export default {
       })
   },
   methods: {
-    bacot () {
-      this.$alert('Website ini digunakan untuk mempermudah pengaksesan data. Data yang tertera pada website ini berasal dari The Center for Systems Science and Engineering John Hopkins University dan data.covid.go.id')
+    alertClick () {
+      this.$alert('Website ini digunakan untuk mempermudah pengaksesan data. Data yang tertera pada website ini berasal dari The Center for Systems Science and Engineering John Hopkins University dan data.covid19.go.id')
     }
   },
   computed: {
