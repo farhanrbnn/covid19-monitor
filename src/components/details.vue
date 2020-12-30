@@ -59,7 +59,7 @@
 
 <script>
 import axios from 'axios'
-import LineChart from '@/components/LineChart'
+import LineChart from '@/components/lineChart'
 
 export default {
   name: 'details',
