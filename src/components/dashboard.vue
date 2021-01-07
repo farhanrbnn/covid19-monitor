@@ -12,7 +12,7 @@
      <b-container>
       <div id="global-head" class="mb-4">
        <h2>Global</h2>
-       <h4>Update Terakhir: <span>{{globalLastUpdate}}</span></h4>
+       <h4>Pembaruan Terakhir: <span>{{globalLastUpdate}}</span></h4>
       </div>
       <b-row v-for="(data, idx) in apiDataGlobal" :key="idx">
         <b-col  lg>
@@ -42,7 +42,7 @@
       </b-row>
       <div id="countries-head" class="mb-4">
        <h2>Indonesia</h2>
-       <h4>Update Terakhir: <span>{{IDNLastUpdate}}</span></h4>
+       <h4>Pembaruan Terakhir: <span>{{IDNLastUpdate}}</span></h4>
       </div>
       <b-row v-for="(data, idx) in apiDataIDN" :key="idx+1">
         <b-col lg>
@@ -134,6 +134,14 @@ export default {
       .catch((err) => {
         alert('error when fetching API' + err)
       })
+
+      await axios.get('https://apicovid19indonesia-v2.vercel.app/api/indonesia/harian')
+        .then((res) => {
+          let data = res.data
+          let dataLength = data.length
+
+          console.log(data[dataLength-1])
+        })
   }
 }
 </script>

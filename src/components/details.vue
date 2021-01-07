@@ -8,8 +8,35 @@
         <b-nav-item @click="alertClick">Tentang</b-nav-item>
       </b-navbar-nav>
       </b-collapse>
-     </b-navbar>
+     </b-navbar>-
      <b-container id="details-head">
+      <h3>update daily</h3>
+      <b-row v-if="dailyUpdate" class="mb-5">
+        <b-col>
+          <b-card class="text-center">
+                <div id="card-positif">
+                  <h5 class="mb-3">Positif</h5>
+                  <h3 id="nilai-positif">{{dailyUpdate.positif}}</h3>
+               </div>
+             </b-card>
+        </b-col>
+        <b-col>
+          <b-card  class="text-center">
+                <div id="card-sembuh">
+                  <h5 class="mb-3">Sembuh</h5>
+                  <h3 id="nilai-positif">{{dailyUpdate.sembuh}}</h3>
+               </div>
+             </b-card>
+        </b-col>
+        <b-col>
+          <b-card  class="text-center">
+                <div id="card-meninggal">
+                  <h5 class="mb-3">Meninggal</h5>
+                  <h3 id="nilai-positif">{{dailyUpdate.meninggal}}</h3>
+               </div>
+             </b-card>
+        </b-col>
+      </b-row>
       <b-row>
         <b-col cols="4" >
           <h5>Pilih Provinsi</h5>
@@ -18,7 +45,7 @@
         </b-form-select>
         </b-col>
         <b-col cols="8" >
-          <h2>{{selected}}</h2>
+          <h3>{{selected}}</h3>
           <b-row v-for="(data, index) in apiData" :key="index">
             <b-col lg>
               <b-card  class="text-center">
@@ -74,7 +101,8 @@ export default {
       positiveDaily: null,
       dailyDate: null,
       loaded: false,
-      chartData: null
+      chartData: null,
+      dailyUpdate: null
     }
   },
   async created () {
@@ -102,8 +130,9 @@ export default {
         let data = res.data
         let arrPositive = []
         let arrDate = []
+        let dataLength = data.length
 
-        for (let i = 0; i < data.length; i++) {
+        for (let i = 0; i < dataLength; i++) {
           if (data) {
             let APIDate = new Date(data[i].tanggal)
 
@@ -112,6 +141,8 @@ export default {
           }
         }
 
+        this.dailyUpdate = data[dataLength-1]
+        console.log(data[dataLength-1])
         this.dailyDate = arrDate
         this.positiveDaily = arrPositive
 
@@ -124,7 +155,6 @@ export default {
           }]
         }
 
-        console.log(this.chartData)
       })
       .catch((err) => {
         alert('error when fetching API' + err)
