@@ -10,8 +10,8 @@
       </b-collapse>
      </b-navbar>-
      <b-container id="details-head">
-      <h3>update daily</h3>
-      <b-row v-if="dailyUpdate" class="mb-5">
+      <h2 class="mb-3">Pembaruan Harian</h2>
+      <b-row id="row-provinsi" v-if="dailyUpdate" class="mb-5">
         <b-col>
           <b-card class="text-center">
                 <div id="card-positif">
@@ -21,10 +21,10 @@
              </b-card>
         </b-col>
         <b-col>
-          <b-card  class="text-center">
+          <b-card class="text-center">
                 <div id="card-sembuh">
                   <h5 class="mb-3">Sembuh</h5>
-                  <h3 id="nilai-positif">{{dailyUpdate.sembuh}}</h3>
+                  <h3 id="nilai-sembuh">{{dailyUpdate.sembuh}}</h3>
                </div>
              </b-card>
         </b-col>
@@ -32,7 +32,7 @@
           <b-card  class="text-center">
                 <div id="card-meninggal">
                   <h5 class="mb-3">Meninggal</h5>
-                  <h3 id="nilai-positif">{{dailyUpdate.meninggal}}</h3>
+                  <h3 id="nilai-meninggal">{{dailyUpdate.meninggal}}</h3>
                </div>
              </b-card>
         </b-col>
@@ -199,7 +199,7 @@ export default {
 #details {
   font-family: 'Roboto', sans-serif;
   background-color: #F3F4F8;
-  height: 930px;
+  height: 1200px;
   color: #595E6B;
 }
 #details-head {
@@ -228,8 +228,9 @@ export default {
 #data-akumulasi {
   margin-top: 100px;
 }
-#test {
-  height: 100px;
-  background-color: #F3F4F8;
+
+#row-provinsi {
+  padding-bottom: 50px;
 }
+
 </style>
